@@ -1,4 +1,5 @@
 <script lang="ts">
+	import HeartHandshake from "@lucide/svelte/icons/heart-handshake";
 	import { Label } from "$lib/components/ui/label/index.js";
 	import { Input } from "$lib/components/ui/input/index.js";
 	import { Button } from "$lib/components/ui/button/index.js";
@@ -16,6 +17,14 @@
 
 <form class={cn("flex flex-col gap-6", className)} bind:this={ref} {...restProps}>
 	<div class="flex flex-col items-center gap-2 text-center">
+		<a href="##" class="flex items-center gap-2 font-medium mb-2">
+				<div
+					class="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md"
+				>
+					<HeartHandshake class="size-4" />
+				</div>
+				HealthPage
+			</a>
 		<h1 class="text-2xl font-bold">Faça login na sua conta</h1>
 		<p class="text-muted-foreground text-balance text-sm">
 			Insira suas credenciais abaixo para fazer login

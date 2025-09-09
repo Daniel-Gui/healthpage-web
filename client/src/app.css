@@ -2,6 +2,8 @@
 
 @import 'tw-animate-css';
 
+@import '@fontsource-variable/manrope';
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -117,5 +119,6 @@
 	}
 	body {
 		@apply bg-background text-foreground;
+		font-family: 'Manrope Variable', sans-serif;
 	}
 }
