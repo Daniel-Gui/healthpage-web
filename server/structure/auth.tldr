@@ -153,9 +153,9 @@
 		{
 			"id": "pointer:pointer",
 			"typeName": "pointer",
-			"x": 1160.496113397348,
-			"y": 208.01173601585134,
-			"lastActivityTimestamp": 1757337251974,
+			"x": 1550.887387374791,
+			"y": 635.0753786648817,
+			"lastActivityTimestamp": 1757452137456,
 			"meta": {}
 		},
 		{
@@ -495,7 +495,7 @@
 			"type": "geo",
 			"props": {
 				"w": 825.1441079009146,
-				"h": 358.3416235955459,
+				"h": 364.24930158332654,
 				"geo": "rectangle",
 				"dash": "solid",
 				"growY": 0,
@@ -525,9 +525,9 @@
 			"typeName": "shape"
 		},
 		{
-			"x": 322.50952598689196,
-			"y": 191.31763450693472,
-			"z": 0.6561000000000001,
+			"x": -397.7086441600163,
+			"y": -96.29514617929019,
+			"z": 0.8463562181862245,
 			"meta": {},
 			"id": "camera:page:page",
 			"typeName": "camera"
@@ -1082,28 +1082,12 @@
 			"editingShapeId": null,
 			"croppingShapeId": null,
 			"selectedShapeIds": [
-				"shape:vsUsKwEABsak0kPGwb1vB",
-				"shape:M1ImEvUx8aXi3b4cVYwMK",
-				"shape:jkX1GS3SfTzTmviKniQJ0",
-				"shape:V_FFad18tokvjcf_GhS5H",
-				"shape:ZYpqG86Vys30QQePHTX_i",
-				"shape:BPqvFz9ME2ulYXJnlC3MK",
-				"shape:-3vYCqkRBmUA3SC5gbNJY",
-				"shape:TR6bMeFXEhdXnXuPC6Pkz",
-				"shape:l3GZ4UGkSZGFG7y7EzVt_",
-				"shape:2ohSfmqEhJFPMPN5FlS0j",
-				"shape:A9tzEk2m32DdCtR95Q9KR",
-				"shape:JCyGrJKgd88wqgUu3yGAX",
-				"shape:nkLYsY46XZmn8hOVuh9FY",
-				"shape:3RXwiST3UZiDuU-3fZxAj",
-				"shape:sv_BAtibZXBzB7XbFKllK",
-				"shape:gFYg27ivg3NX_tyPwa-Xo",
-				"shape:ItlzAu-UBgGjNDNG-8AbF"
+				"shape:NXkoujbPAdTeK3h55d6VF"
 			],
-			"hoveredShapeId": null,
+			"hoveredShapeId": "shape:NXkoujbPAdTeK3h55d6VF",
 			"erasingShapeIds": [],
 			"hintingShapeIds": [],
-			"focusedGroupId": null,
+			"focusedGroupId": "shape:V_FFad18tokvjcf_GhS5H",
 			"meta": {},
 			"id": "instance_page_state:page:page",
 			"pageId": "page:page",
@@ -1858,7 +1842,7 @@
 			"brush": null,
 			"scribbles": [],
 			"cursor": {
-				"type": "default",
+				"type": "ns-resize",
 				"rotation": 0
 			},
 			"isFocusMode": false,
@@ -1868,8 +1852,8 @@
 			"screenBounds": {
 				"x": 0,
 				"y": 0,
-				"w": 2303,
-				"h": 918
+				"w": 1773,
+				"h": 690
 			},
 			"insets": [
 				false,

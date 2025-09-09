@@ -25,13 +25,17 @@
 				</div>
 				HealthPage
 			</a>
-		<h1 class="text-2xl font-bold">Faça login na sua conta</h1>
+		<h1 class="text-2xl font-bold">Cadastre-se</h1>
 		<p class="text-muted-foreground text-balance text-sm">
-			Insira suas credenciais abaixo para fazer login
+			Insira seus dados abaixo para criar sua conta
 		</p>
 	</div>
 	<div class="grid gap-6">
 		<div class="grid gap-3">
+			<Label for="text-{id}">Nome e sobrenome</Label>
+			<Input id="text-{id}" type="text" placeholder="Ex: José Silva" required />
+		</div>
+        <div class="grid gap-3">
 			<Label for="email-{id}">Email</Label>
 			<Input id="email-{id}" type="email" placeholder="teste@exemplo.com" required />
 		</div>
@@ -44,12 +48,16 @@
 			</div>
 			<Input id="password-{id}" type="password" required />
 		</div>
+          <div class="grid gap-3">
+			<Label for="confirm-password-{id}">Confirmar senha</Label>
+			<Input id="confirm-password-{id}" type="password" required />
+		</div>
 		<Button type="submit" class="w-full">Entrar</Button>
 		
 		
 	</div>
 	<div class="text-center text-sm">
-		Não tem uma conta?
-		<a href="/cadastro" class="underline underline-offset-4"> Cadastre-se </a>
+		Já tem uma conta?
+		<a href="/login" class="underline underline-offset-4"> Faça login </a>
 	</div>
 </form>
