@@ -6,10 +6,15 @@
 !.vscode/launch.json
 !.vscode/tasks.json
 
+server/**/.vs/
+**/.vs/
+**/*.suo
+**/*.user
+
 server/**/bin/
 # ===== .NET (server) =====
 server/health-app/bin/*
-server/health-app/.vs/*
+server/health-app/.vs/
 server/health-app/bin
 
 server/**/obj/
