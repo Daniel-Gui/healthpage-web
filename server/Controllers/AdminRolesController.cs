@@ -1,4 +1,5 @@
 ﻿using health_app.Authorization;
+using health_app.Common;
 using health_app.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -29,7 +30,7 @@ namespace health_app.Controllers
         public async Task<IActionResult> GetUserRoles([FromRoute] Guid id)
         {
             var user = await _userManager.FindByIdAsync(id.ToString());
-            if (user == null) return NotFound(new { message = "Usuário não encontrado." });
+            if (user == null) return ErrorResults.NotFound(this, "Usuário não encontrado.");
 
             var roles = await _userManager.GetRolesAsync(user);
             return Ok(new { user.Id, user.UserName, roles });
@@ -39,13 +40,13 @@ namespace health_app.Controllers
         public async Task<IActionResult> AssignRole([FromBody] ChangeRoleRequest req)
         {
             var user = await _userManager.FindByIdAsync(req.UserId.ToString());
-            if (user == null) return NotFound(new { message = "Usuário não encontrado." });
+            if (user == null) return ErrorResults.NotFound(this, "Usuário não encontrado.");
 
             if (!await _roleManager.RoleExistsAsync(req.Role))
-                return BadRequest(new { message = $"Role '{req.Role}' não existe." });
+                return ErrorResults.BadRequest(this, $"Role '{req.Role}' não existe.");
 
             var res = await _userManager.AddToRoleAsync(user, req.Role);
-            if (!res.Succeeded) return Problem(string.Join("; ", res.Errors.Select(e => e.Description)));
+            if (!res.Succeeded) return ErrorResults.BadRequest(this, string.Join("; ", res.Errors.Select(e => e.Description)));
 
             return Ok(new { message = "Role atribuída.", req.UserId, req.Role });
         }
@@ -54,7 +55,7 @@ namespace health_app.Controllers
         public async Task<IActionResult> RemoveRole([FromBody] ChangeRoleRequest req)
         {
             var user = await _userManager.FindByIdAsync(req.UserId.ToString());
-            if (user == null) return NotFound(new { message = "Usuário não encontrado." });
+            if (user == null) return ErrorResults.NotFound(this, "Usuário não encontrado.");
 
             if (req.Role.Equals(RoleNames.Admin, StringComparison.OrdinalIgnoreCase))
             {
@@ -63,7 +64,7 @@ namespace health_app.Controllers
             }
 
             var res = await _userManager.RemoveFromRoleAsync(user, req.Role);
-            if (!res.Succeeded) return Problem(string.Join("; ", res.Errors.Select(e => e.Description)));
+            if (!res.Succeeded) return ErrorResults.BadRequest(this, string.Join("; ", res.Errors.Select(e => e.Description)));
 
             return Ok(new { message = "Role removida.", req.UserId, req.Role });
         }
@@ -72,11 +73,11 @@ namespace health_app.Controllers
         public async Task<IActionResult> SetRoles([FromBody] SetRolesRequest req)
         {
             var user = await _userManager.FindByIdAsync(req.UserId.ToString());
-            if (user == null) return NotFound(new { message = "Usuário não encontrado." });
+            if (user == null) return ErrorResults.NotFound(this, "Usuário não encontrado.");
 
             foreach (var role in req.Roles)
                 if (!await _roleManager.RoleExistsAsync(role))
-                    return BadRequest(new { message = $"Role '{role}' não existe." });
+                    return ErrorResults.BadRequest(this, $"Role '{role}' não existe.");
 
             var current = await _userManager.GetRolesAsync(user);
             var toRemove = current.Except(req.Roles, StringComparer.OrdinalIgnoreCase).ToArray();
@@ -85,13 +86,13 @@ namespace health_app.Controllers
             if (toRemove.Length > 0)
             {
                 var r = await _userManager.RemoveFromRolesAsync(user, toRemove);
-                if (!r.Succeeded) return Problem(string.Join("; ", r.Errors.Select(e => e.Description)));
+                if (!r.Succeeded) return ErrorResults.BadRequest(this, string.Join("; ", r.Errors.Select(e => e.Description)));
             }
 
             if (toAdd.Length > 0)
             {
                 var r = await _userManager.AddToRolesAsync(user, toAdd);
-                if (!r.Succeeded) return Problem(string.Join("; ", r.Errors.Select(e => e.Description)));
+                if (!r.Succeeded) return ErrorResults.BadRequest(this, string.Join("; ", r.Errors.Select(e => e.Description)));
             }
 
             var final = await _userManager.GetRolesAsync(user);

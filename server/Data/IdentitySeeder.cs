@@ -17,7 +17,7 @@ namespace health_app.Data
             {
                 if (!await roleMgr.RoleExistsAsync(role))
                     await roleMgr.CreateAsync(new IdentityRole<Guid>(role));
-            }
+            } 
 
             // 2) (Opcional) Criar admin inicial via config (use user-secrets em dev)
             var adminEmail = config["SeedAdmin:Email"];
