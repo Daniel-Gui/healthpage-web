@@ -234,32 +234,22 @@
 
 	let views = [
 		{
-			id: "outline",
-			label: "Outline",
+			id: "appointments",
+			label: "Aba 1",
 			badge: 0,
 		},
 		{
-			id: "past-performance",
-			label: "Past Performance",
-			badge: 3,
-		},
-		{
-			id: "key-personnel",
-			label: "Key Personnel",
-			badge: 2,
-		},
-		{
-			id: "focus-documents",
-			label: "Focus Documents",
-			badge: 0,
-		},
+			id: "another-tab",
+			label: "Aba 2",
+			badge: 1,
+		}
 	];
 
-	let view = $state("outline");
+	let view = $state("appointments");
 	let viewLabel = $derived(views.find((v) => view === v.id)?.label ?? "Select a view");
 </script>
 
-<Tabs.Root value="outline" class="w-full flex-col justify-start gap-6">
+<Tabs.Root value="appointments" class="w-full flex-col justify-start gap-6">
 	<div class="flex items-center justify-between px-4 lg:px-6">
 		<Label for="view-selector" class="sr-only">View</Label>
 		<Select.Root type="single" bind:value={view}>
@@ -290,8 +280,8 @@
 					{#snippet child({ props })}
 						<Button variant="outline" size="sm" {...props}>
 							<LayoutColumnsIcon />
-							<span class="hidden lg:inline">Customize Columns</span>
-							<span class="lg:hidden">Columns</span>
+							<span class="hidden lg:inline">Personalizar colunas</span>
+							<span class="lg:hidden">Colunas</span>
 							<ChevronDownIcon />
 						</Button>
 					{/snippet}
@@ -312,11 +302,11 @@
 			</DropdownMenu.Root>
 			<Button variant="outline" size="sm">
 				<PlusIcon />
-				<span class="hidden lg:inline">Add Section</span>
+				<span class="hidden lg:inline">Adicionar</span>
 			</Button>
 		</div>
 	</div>
-	<Tabs.Content value="outline" class="relative flex flex-col gap-4 overflow-auto px-4 lg:px-6">
+	<Tabs.Content value="appointments" class="relative flex flex-col gap-4 overflow-auto px-4 lg:px-6">
 		<div class="overflow-hidden rounded-lg border">
 			<DndContext
 				collisionDetection={closestCenter}
@@ -352,7 +342,7 @@
 						{:else}
 							<Table.Row>
 								<Table.Cell colspan={columns.length} class="h-24 text-center">
-									No results.
+									Nenhum resultado encontrado.
 								</Table.Cell>
 							</Table.Row>
 						{/if}
@@ -362,12 +352,12 @@
 		</div>
 		<div class="flex items-center justify-between px-4">
 			<div class="text-muted-foreground hidden flex-1 text-sm lg:flex">
-				{table.getFilteredSelectedRowModel().rows.length} of
-				{table.getFilteredRowModel().rows.length} row(s) selected.
+				{table.getFilteredSelectedRowModel().rows.length} de
+				{table.getFilteredRowModel().rows.length} linha(s) selecionada(s).
 			</div>
 			<div class="flex w-full items-center gap-8 lg:w-fit">
 				<div class="hidden items-center gap-2 lg:flex">
-					<Label for="rows-per-page" class="text-sm font-medium">Rows per page</Label>
+					<Label for="rows-per-page" class="text-sm font-medium">Linhas por página</Label>
 					<Select.Root
 						type="single"
 						bind:value={
@@ -388,7 +378,7 @@
 					</Select.Root>
 				</div>
 				<div class="flex w-fit items-center justify-center text-sm font-medium">
-					Page {table.getState().pagination.pageIndex + 1} of
+					Página {table.getState().pagination.pageIndex + 1} de
 					{table.getPageCount()}
 				</div>
 				<div class="ml-auto flex items-center gap-2 lg:ml-0">
@@ -398,7 +388,7 @@
 						onclick={() => table.setPageIndex(0)}
 						disabled={!table.getCanPreviousPage()}
 					>
-						<span class="sr-only">Go to first page</span>
+						<span class="sr-only">Ir para a primeira página</span>
 						<ChevronsLeftIcon />
 					</Button>
 					<Button
@@ -408,7 +398,7 @@
 						onclick={() => table.previousPage()}
 						disabled={!table.getCanPreviousPage()}
 					>
-						<span class="sr-only">Go to previous page</span>
+						<span class="sr-only">Ir para a página anterior</span>
 						<ChevronLeftIcon />
 					</Button>
 					<Button
@@ -418,7 +408,7 @@
 						onclick={() => table.nextPage()}
 						disabled={!table.getCanNextPage()}
 					>
-						<span class="sr-only">Go to next page</span>
+						<span class="sr-only">Ir para a próxima página</span>
 						<ChevronRightIcon />
 					</Button>
 					<Button
@@ -428,7 +418,7 @@
 						onclick={() => table.setPageIndex(table.getPageCount() - 1)}
 						disabled={!table.getCanNextPage()}
 					>
-						<span class="sr-only">Go to last page</span>
+						<span class="sr-only">Ir para a última página</span>
 						<ChevronsRightIcon />
 					</Button>
 				</div>
@@ -511,16 +501,15 @@
 			{#snippet child({ props })}
 				<Button variant="ghost" size="icon" {...props}>
 					<DotsVerticalIcon />
-					<span class="sr-only">Open menu</span>
+					<span class="sr-only">Abrir menu</span>
 				</Button>
 			{/snippet}
 		</DropdownMenu.Trigger>
 		<DropdownMenu.Content align="end" class="w-32">
-			<DropdownMenu.Item>Edit</DropdownMenu.Item>
-			<DropdownMenu.Item>Make a copy</DropdownMenu.Item>
-			<DropdownMenu.Item>Favorite</DropdownMenu.Item>
+			<DropdownMenu.Item>Editar</DropdownMenu.Item>
+			<DropdownMenu.Item>Arquivar</DropdownMenu.Item>
 			<DropdownMenu.Separator />
-			<DropdownMenu.Item variant="destructive">Delete</DropdownMenu.Item>
+			<DropdownMenu.Item variant="destructive">Excluir</DropdownMenu.Item>
 		</DropdownMenu.Content>
 	</DropdownMenu.Root>
 {/snippet}
@@ -558,6 +547,6 @@
 		class="text-muted-foreground size-7 hover:bg-transparent"
 	>
 		<GripVerticalIcon class="text-muted-foreground size-3" />
-		<span class="sr-only">Drag to reorder</span>
+		<span class="sr-only">Arrastar para reordenar</span>
 	</Button>
 {/snippet}
