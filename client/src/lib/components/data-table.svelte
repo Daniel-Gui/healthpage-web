@@ -25,14 +25,14 @@
 			enableHiding: false,
 		},
 		{
-			accessorKey: "header",
-			header: "Header",
-			cell: ({ row }) => renderComponent(DataTableCellViewer, { item: row.original }),
+			accessorKey: "patientName",
+			header: "Paciente",
+			cell: ({ row }) => row.original.patientName,
 			enableHiding: false,
 		},
 		{
-			accessorKey: "type",
-			header: "Section Type",
+			accessorKey: "appointmentType",
+			header: "Tipo de Consulta",
 			cell: ({ row }) => renderSnippet(DataTableType, { row }),
 		},
 		{
@@ -41,29 +41,27 @@
 			cell: ({ row }) => renderSnippet(DataTableStatus, { row }),
 		},
 		{
-			accessorKey: "target",
-			header: () =>
-				renderSnippet(
-					createRawSnippet(() => ({
-						render: () => '<div class="w-full text-right">Target</div>',
-					}))
-				),
-			cell: ({ row }) => renderSnippet(DataTableTarget, { row }),
+			accessorKey: "date",
+			header: "Data",
+			cell: ({ row }) => {
+				const date = new Date(row.original.date);
+				return date.toLocaleDateString('pt-BR');
+			},
 		},
 		{
-			accessorKey: "limit",
-			header: () =>
-				renderSnippet(
-					createRawSnippet(() => ({
-						render: () => '<div class="w-full text-right">Limit</div>',
-					}))
-				),
-			cell: ({ row }) => renderSnippet(DataTableLimit, { row }),
+			accessorKey: "time",
+			header: "Horário",
+			cell: ({ row }) => row.original.time,
 		},
 		{
-			accessorKey: "reviewer",
-			header: "Reviewer",
-			cell: ({ row }) => renderComponent(DataTableReviewer, { row }),
+			accessorKey: "duration",
+			header: "Duração (min)",
+			cell: ({ row }) => row.original.duration,
+		},
+		{
+			accessorKey: "doctorName",
+			header: "Médico",
+			cell: ({ row }) => row.original.doctorName,
 		},
 		{
 			id: "actions",
@@ -134,9 +132,7 @@
 	import DotsVerticalIcon from "@tabler/icons-svelte/icons/dots-vertical";
 	import { toast } from "svelte-sonner";
 	import DataTableCheckbox from "./data-table-checkbox.svelte";
-	import DataTableCellViewer from "./data-table-cell-viewer.svelte";
-	import { createRawSnippet } from "svelte";
-	import DataTableReviewer from "./data-table-reviewer.svelte";
+import { createRawSnippet } from "svelte";
 	import { CSS } from "@dnd-kit-svelte/utilities";
 
 	let { data }: { data: Schema[] } = $props();
@@ -436,62 +432,45 @@
 	</Tabs.Content>
 </Tabs.Root>
 
-{#snippet DataTableLimit({ row }: { row: Row<Schema> })}
-	<form
-		onsubmit={(e) => {
-			e.preventDefault();
-			toast.promise(new Promise((resolve) => setTimeout(resolve, 1000)), {
-				loading: `Saving ${row.original.header}`,
-				success: "Done",
-				error: "Error",
-			});
-		}}
-	>
-		<Label for="{row.original.id}-limit" class="sr-only">Limit</Label>
-		<Input
-			class="hover:bg-input/30 focus-visible:bg-background dark:hover:bg-input/30 dark:focus-visible:bg-input/30 h-8 w-16 border-transparent bg-transparent text-right shadow-none focus-visible:border dark:bg-transparent"
-			value={row.original.limit}
-			id="{row.original.id}-limit"
-		/>
-	</form>
-{/snippet}
 
-{#snippet DataTableTarget({ row }: { row: Row<Schema> })}
-	<form
-		onsubmit={(e) => {
-			e.preventDefault();
-			toast.promise(new Promise((resolve) => setTimeout(resolve, 1000)), {
-				loading: `Saving ${row.original.header}`,
-				success: "Done",
-				error: "Error",
-			});
-		}}
-	>
-		<Label for="{row.original.id}-target" class="sr-only">Target</Label>
-		<Input
-			class="hover:bg-input/30 focus-visible:bg-background dark:hover:bg-input/30 dark:focus-visible:bg-input/30 h-8 w-16 border-transparent bg-transparent text-right shadow-none focus-visible:border dark:bg-transparent"
-			value={row.original.target}
-			id="{row.original.id}-target"
-		/>
-	</form>
-{/snippet}
 
 {#snippet DataTableType({ row }: { row: Row<Schema> })}
+	{@const typeTranslations: Record<string, string> = {
+		"General Checkup": "Consulta Geral",
+		"Cardiology": "Cardiologia",
+		"Dermatology": "Dermatologia",
+		"Pediatrics": "Pediatria",
+		"Orthopedics": "Ortopedia",
+		"Gynecology": "Ginecologia",
+		"Neurology": "Neurologia",
+		"Ophthalmology": "Oftalmologia",
+		"Psychiatry": "Psiquiatria"
+	}}
 	<div class="w-32">
 		<Badge variant="outline" class="text-muted-foreground px-1.5">
-			{row.original.type}
+			{typeTranslations[row.original.appointmentType] || row.original.appointmentType}
 		</Badge>
 	</div>
 {/snippet}
 
 {#snippet DataTableStatus({ row }: { row: Row<Schema> })}
+	{@const statusTranslations: Record<string, string> = {
+		"Scheduled": "Agendado",
+		"Completed": "Concluído",
+		"Cancelled": "Cancelado",
+		"Pending": "Pendente"
+	}}
 	<Badge variant="outline" class="text-muted-foreground px-1.5">
-		{#if row.original.status === "Done"}
+		{#if row.original.status === "Scheduled"}
+			<CircleCheckFilledIcon class="fill-blue-500 dark:fill-blue-400" />
+		{:else if row.original.status === "Completed"}
 			<CircleCheckFilledIcon class="fill-green-500 dark:fill-green-400" />
+		{:else if row.original.status === "Cancelled"}
+			<CircleCheckFilledIcon class="fill-red-500 dark:fill-red-400" />
 		{:else}
 			<LoaderIcon />
 		{/if}
-		{row.original.status}
+		{statusTranslations[row.original.status] || row.original.status}
 	</Badge>
 {/snippet}
 
@@ -505,11 +484,12 @@
 				</Button>
 			{/snippet}
 		</DropdownMenu.Trigger>
-		<DropdownMenu.Content align="end" class="w-32">
-			<DropdownMenu.Item>Editar</DropdownMenu.Item>
-			<DropdownMenu.Item>Arquivar</DropdownMenu.Item>
+		<DropdownMenu.Content align="end" class="w-40">
+			<DropdownMenu.Item>Editar Consulta</DropdownMenu.Item>
+			<DropdownMenu.Item>Reagendar</DropdownMenu.Item>
+			<DropdownMenu.Item>Ver Detalhes</DropdownMenu.Item>
 			<DropdownMenu.Separator />
-			<DropdownMenu.Item variant="destructive">Excluir</DropdownMenu.Item>
+			<DropdownMenu.Item variant="destructive">Cancelar</DropdownMenu.Item>
 		</DropdownMenu.Content>
 	</DropdownMenu.Root>
 {/snippet}
