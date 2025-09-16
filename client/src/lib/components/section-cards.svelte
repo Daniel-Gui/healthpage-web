@@ -10,82 +10,82 @@
 >
 	<Card.Root class="@container/card">
 		<Card.Header>
-			<Card.Description>Total Revenue</Card.Description>
+			<Card.Description>Consultas Agendadas</Card.Description>
 			<Card.Title class="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
-				$1,250.00
+				127
 			</Card.Title>
 			<Card.Action>
 				<Badge variant="outline">
 					<TrendingUpIcon />
-					+12.5%
+					+8.2%
 				</Badge>
 			</Card.Action>
 		</Card.Header>
 		<Card.Footer class="flex-col items-start gap-1.5 text-sm">
 			<div class="line-clamp-1 flex gap-2 font-medium">
-				Trending up this month <TrendingUpIcon class="size-4" />
+				Crescimento este mês <TrendingUpIcon class="size-4" />
 			</div>
-			<div class="text-muted-foreground">Visitors for the last 6 months</div>
+			<div class="text-muted-foreground">Agendamentos dos últimos 30 dias</div>
 		</Card.Footer>
 	</Card.Root>
 	<Card.Root class="@container/card">
 		<Card.Header>
-			<Card.Description>New Customers</Card.Description>
+			<Card.Description>Pacientes Atendidos</Card.Description>
 			<Card.Title class="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
-				1,234
-			</Card.Title>
-			<Card.Action>
-				<Badge variant="outline">
-					<TrendingDownIcon />
-					-20%
-				</Badge>
-			</Card.Action>
-		</Card.Header>
-		<Card.Footer class="flex-col items-start gap-1.5 text-sm">
-			<div class="line-clamp-1 flex gap-2 font-medium">
-				Down 20% this period <TrendingDownIcon class="size-4" />
-			</div>
-			<div class="text-muted-foreground">Acquisition needs attention</div>
-		</Card.Footer>
-	</Card.Root>
-	<Card.Root class="@container/card">
-		<Card.Header>
-			<Card.Description>Active Accounts</Card.Description>
-			<Card.Title class="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
-				45,678
+				89
 			</Card.Title>
 			<Card.Action>
 				<Badge variant="outline">
 					<TrendingUpIcon />
-					+12.5%
+					+15.3%
 				</Badge>
 			</Card.Action>
 		</Card.Header>
 		<Card.Footer class="flex-col items-start gap-1.5 text-sm">
 			<div class="line-clamp-1 flex gap-2 font-medium">
-				Strong user retention <TrendingUpIcon class="size-4" />
+				Aumento significativo <TrendingUpIcon class="size-4" />
 			</div>
-			<div class="text-muted-foreground">Engagement exceed targets</div>
+			<div class="text-muted-foreground">Consultas concluídas este mês</div>
 		</Card.Footer>
 	</Card.Root>
 	<Card.Root class="@container/card">
 		<Card.Header>
-			<Card.Description>Growth Rate</Card.Description>
+			<Card.Description>Taxa de Comparecimento</Card.Description>
 			<Card.Title class="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
-				4.5%
+				92.5%
 			</Card.Title>
 			<Card.Action>
 				<Badge variant="outline">
 					<TrendingUpIcon />
-					+4.5%
+					+2.1%
 				</Badge>
 			</Card.Action>
 		</Card.Header>
 		<Card.Footer class="flex-col items-start gap-1.5 text-sm">
 			<div class="line-clamp-1 flex gap-2 font-medium">
-				Steady performance increase <TrendingUpIcon class="size-4" />
+				Excelente adesão <TrendingUpIcon class="size-4" />
 			</div>
-			<div class="text-muted-foreground">Meets growth projections</div>
+			<div class="text-muted-foreground">Pacientes que compareceram às consultas</div>
+		</Card.Footer>
+	</Card.Root>
+	<Card.Root class="@container/card">
+		<Card.Header>
+			<Card.Description>Próximas Consultas</Card.Description>
+			<Card.Title class="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
+				24
+			</Card.Title>
+			<Card.Action>
+				<Badge variant="outline">
+					<TrendingUpIcon />
+					+6
+				</Badge>
+			</Card.Action>
+		</Card.Header>
+		<Card.Footer class="flex-col items-start gap-1.5 text-sm">
+			<div class="line-clamp-1 flex gap-2 font-medium">
+				Agenda organizada <TrendingUpIcon class="size-4" />
+			</div>
+			<div class="text-muted-foreground">Consultas agendadas para os próximos 7 dias</div>
 		</Card.Footer>
 	</Card.Root>
 </div>
