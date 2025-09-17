@@ -1,21 +1,10 @@
 <script lang="ts">
 	import HeartHandshake from "@lucide/svelte/icons/heart-handshake";
-	import CameraIcon from "@tabler/icons-svelte/icons/camera";
-	import ChartBarIcon from "@tabler/icons-svelte/icons/chart-bar";
 	import DashboardIcon from "@tabler/icons-svelte/icons/dashboard";
-	import DatabaseIcon from "@tabler/icons-svelte/icons/database";
-	import FileAiIcon from "@tabler/icons-svelte/icons/file-ai";
-	import FileDescriptionIcon from "@tabler/icons-svelte/icons/file-description";
-	import FileWordIcon from "@tabler/icons-svelte/icons/file-word";
-	import FolderIcon from "@tabler/icons-svelte/icons/folder";
 	import HelpIcon from "@tabler/icons-svelte/icons/help";
-	import InnerShadowTopIcon from "@tabler/icons-svelte/icons/inner-shadow-top";
-	import ListDetailsIcon from "@tabler/icons-svelte/icons/list-details";
 	import ReportIcon from "@tabler/icons-svelte/icons/report";
-	import SearchIcon from "@tabler/icons-svelte/icons/search";
 	import SettingsIcon from "@tabler/icons-svelte/icons/settings";
-	import UsersIcon from "@tabler/icons-svelte/icons/users";
-	import NavDocuments from "./nav-documents.svelte";
+	//import NavDocuments from "./nav-documents.svelte";
 	import NavMain from "./nav-main.svelte";
 	import NavSecondary from "./nav-secondary.svelte";
 	import NavUser from "./nav-user.svelte";
@@ -31,28 +20,13 @@
 		navMain: [
 			{
 				title: "Dashboard",
-				url: "#",
+				url: "/dashboard/healthcare-professional",
 				icon: DashboardIcon,
 			},
 			{
-				title: "Website",
-				url: "#",
-				icon: ListDetailsIcon,
-			},
-			{
 				title: "Agendamentos",
-				url: "#",
-				icon: ChartBarIcon,
-			},
-			{
-				title: "Leads",
-				url: "#",
-				icon: ChartBarIcon,
-			},
-			{
-				title: "Feedbacks",
-				url: "#",
-				icon: ChartBarIcon,
+				url: "/dashboard/healthcare-professional/appointments",
+				icon: ReportIcon,
 			},
 		],
 		navSecondary: [
@@ -62,33 +36,16 @@
 				icon: SettingsIcon,
 			},
 			{
-				title: "Suporte",
-				url: "#",
-				icon: HelpIcon,
-			},
-			{
 				title: "Configurações",
 				url: "#",
 				icon: SettingsIcon,
+			},
+			{
+				title: "Suporte",
+				url: "#",
+				icon: HelpIcon,
 			}
-		],
-		documents: [
-			{
-				name: "Item 1",
-				url: "#",
-				icon: DatabaseIcon,
-			},
-			{
-				name: "Item 2",
-				url: "#",
-				icon: ReportIcon,
-			},
-			{
-				name: "Item 3",
-				url: "#",
-				icon: FileWordIcon,
-			},
-		],
+		]
 	};
 
 	let { ...restProps }: ComponentProps<typeof Sidebar.Root> = $props();
@@ -111,7 +68,6 @@
 	</Sidebar.Header>
 	<Sidebar.Content>
 		<NavMain items={data.navMain} />
-		<NavDocuments items={data.documents} />
 		<NavSecondary items={data.navSecondary} class="mt-auto" />
 	</Sidebar.Content>
 	<Sidebar.Footer>

@@ -7,10 +7,16 @@
 
 	import * as DropdownMenu from "$lib/components/ui/dropdown-menu/index.js";
 	import * as Sidebar from "$lib/components/ui/sidebar/index.js";
+	import { page } from "$app/state";
 
 	let { items }: { items: { name: string; url: string; icon: Icon }[] } = $props();
 
 	const sidebar = Sidebar.useSidebar();
+
+	// Função para verificar se o item está ativo baseado na URL atual
+	function isItemActive(itemUrl: string): boolean {
+		return page.url.pathname === itemUrl;
+	}
 </script>
 
 <Sidebar.Group class="group-data-[collapsible=icon]:hidden">
@@ -18,13 +24,9 @@
 	<Sidebar.Menu>
 		{#each items as item (item.name)}
 			<Sidebar.MenuItem>
-				<Sidebar.MenuButton>
-					{#snippet child({ props })}
-						<a {...props} href={item.url}>
-							<item.icon />
-							<span>{item.name}</span>
-						</a>
-					{/snippet}
+				<Sidebar.MenuButton isActive={isItemActive(item.url)} href={item.url}>
+					<item.icon />
+					<span>{item.name}</span>
 				</Sidebar.MenuButton>
 				<DropdownMenu.Root>
 					<DropdownMenu.Trigger>

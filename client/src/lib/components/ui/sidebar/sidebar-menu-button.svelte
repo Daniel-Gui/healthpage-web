@@ -43,13 +43,15 @@
 		variant = "default",
 		size = "default",
 		isActive = false,
+		href,
 		tooltipContent,
 		tooltipContentProps,
 		...restProps
-	}: WithElementRef<HTMLAttributes<HTMLButtonElement>, HTMLButtonElement> & {
+	}: (WithElementRef<HTMLAttributes<HTMLButtonElement>, HTMLButtonElement> | WithElementRef<HTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>) & {
 		isActive?: boolean;
 		variant?: SidebarMenuButtonVariant;
 		size?: SidebarMenuButtonSize;
+		href?: string;
 		tooltipContent?: Snippet | string;
 		tooltipContentProps?: WithoutChildrenOrChild<ComponentProps<typeof Tooltip.Content>>;
 		child?: Snippet<[{ props: Record<string, unknown> }]>;
@@ -63,6 +65,7 @@
 		"data-sidebar": "menu-button",
 		"data-size": size,
 		"data-active": isActive,
+		...(href ? { href } : {}),
 		...restProps,
 	});
 </script>
@@ -71,6 +74,10 @@
 	{@const mergedProps = mergeProps(buttonProps, props)}
 	{#if child}
 		{@render child({ props: mergedProps })}
+	{:else if href}
+		<a bind:this={ref} {...mergedProps}>
+			{@render children?.()}
+		</a>
 	{:else}
 		<button bind:this={ref} {...mergedProps}>
 			{@render children?.()}

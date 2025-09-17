@@ -61,21 +61,21 @@
 				<DropdownMenu.Group>
 					<DropdownMenu.Item>
 						<UserCircleIcon />
-						Account
+						Conta
 					</DropdownMenu.Item>
 					<DropdownMenu.Item>
 						<CreditCardIcon />
-						Billing
+						Cobrança
 					</DropdownMenu.Item>
 					<DropdownMenu.Item>
 						<NotificationIcon />
-						Notifications
+						Notificações
 					</DropdownMenu.Item>
 				</DropdownMenu.Group>
 				<DropdownMenu.Separator />
 				<DropdownMenu.Item>
 					<LogoutIcon />
-					Log out
+					Sair
 				</DropdownMenu.Item>
 			</DropdownMenu.Content>
 		</DropdownMenu.Root>

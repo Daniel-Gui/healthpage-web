@@ -4,8 +4,14 @@
 	import { Button } from "$lib/components/ui/button/index.js";
 	import * as Sidebar from "$lib/components/ui/sidebar/index.js";
 	import type { Icon } from "@tabler/icons-svelte";
+	import { page } from "$app/state";
 
 	let { items }: { items: { title: string; url: string; icon?: Icon }[] } = $props();
+
+	// Função para verificar se o item está ativo baseado na URL atual
+	function isItemActive(itemUrl: string): boolean {
+		return page.url.pathname === itemUrl;
+	}
 </script>
 
 <Sidebar.Group>
@@ -13,7 +19,11 @@
 		<Sidebar.Menu>
 			{#each items as item (item.title)}
 				<Sidebar.MenuItem>
-					<Sidebar.MenuButton tooltipContent={item.title}>
+					<Sidebar.MenuButton
+						tooltipContent={item.title}
+						isActive={isItemActive(item.url)}
+						href={item.url}
+					>
 						{#if item.icon}
 							<item.icon />
 						{/if}
