@@ -7,12 +7,11 @@
 	import type { HTMLFormAttributes } from 'svelte/elements';
 
 	let {
-		userSpecification,
 		ref = $bindable(null),
 		class: className,
 		...restProps
 	}: WithElementRef<
-		HTMLFormAttributes & { userSpecification?: 'patient-user' | 'professional-user' }
+		HTMLFormAttributes
 	> = $props();
 
 	const id = $props.id();
@@ -35,30 +34,7 @@
 	</div>
 
 	<div class="grid gap-6">
-		{#if userSpecification === 'patient-user'}
-			<div class="grid gap-3">
-				<Label for="text-{id}">Nome e sobrenome</Label>
-				<Input id="text-{id}" type="text" placeholder="Ex: José Silva" required />
-			</div>
-			<div class="grid gap-3">
-				<Label for="email-{id}">Email</Label>
-				<Input id="email-{id}" type="email" placeholder="teste@exemplo.com" required />
-			</div>
-			<div class="grid gap-3">
-				<div class="flex items-center">
-					<Label for="password-{id}">Senha</Label>
-					<a href="##" class="ml-auto text-sm underline-offset-4 hover:underline">
-						Esqueceu sua senha?
-					</a>
-				</div>
-				<Input id="password-{id}" type="password" required />
-			</div>
-			<div class="grid gap-3">
-				<Label for="confirm-password-{id}">Confirmar senha</Label>
-				<Input id="confirm-password-{id}" type="password" required />
-			</div>
-			<Button type="submit" class="w-full">Entrar</Button>
-		{:else if userSpecification === 'professional-user'}
+		
 			<div class="grid gap-3">
 				<Label for="text-{id}">Nome e sobrenome</Label>
 				<Input id="text-{id}" type="text" placeholder="Ex: José Silva" required />
@@ -85,7 +61,7 @@
 				<Input id="confirm-password-{id}" type="password" required />
 			</div>
 			<Button type="submit" class="w-full">Entrar</Button>
-		{/if}
+		
 	</div>
 	<div class="text-center text-sm">
 		Já tem uma conta?
