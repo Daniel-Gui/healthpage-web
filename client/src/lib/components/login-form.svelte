@@ -50,6 +50,6 @@
 	</div>
 	<div class="text-center text-sm">
 		Não tem uma conta?
-		<a href="/cadastro" class="underline underline-offset-4"> Cadastre-se </a>
+		<a href="/register" class="underline underline-offset-4"> Cadastre-se </a>
 	</div>
 </form>

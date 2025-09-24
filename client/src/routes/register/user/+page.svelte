@@ -12,7 +12,7 @@
 	</div>
 	<div class="bg-muted relative hidden lg:block">
 		<img
-			src="/images/login/login-background.avif"
+			src="/images/login/login-user-background.avif"
 			alt="placeholder"
 			class="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
 		/>
